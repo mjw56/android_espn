@@ -12,12 +12,11 @@
             android:textStyle="bold"
             android:paddingTop="10dip"
             android:paddingBottom="10dip"
-            android:textColor="#43bd00"/>
+            android:textColor="#FF0000"/>
   <!-- URL Label -->
   <TextView android:id="@+id/href_label"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#acacac"
-            android:autoLink="web"/>
+            android:textColor="#acacac"/>
 </LinearLayout>
 

@@ -1,9 +1,13 @@
 package com.example.espn.headlines;
 
+import java.util.regex.Pattern;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.widget.TextView;
 
 public class ListHeadlines  extends Activity {
@@ -28,8 +32,12 @@ public class ListHeadlines  extends Activity {
         TextView lblHeadline = (TextView) findViewById(R.id.headline_label);
         TextView lblHref = (TextView) findViewById(R.id.href_label);
         
+        String href_text = "<a href='"+ href +"'>Read The Full Story</a>";
+        
         lblHeadline.setText(headline);
-        lblHref.setText(href);
+        //lblHref.setText(href_text);
+        
+        lblHref.setText(Html.fromHtml(href_text));
         lblHref.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
