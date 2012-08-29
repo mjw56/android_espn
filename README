@@ -1,0 +1,6 @@
+android_espn
+------------
+
+This is a simple Android application that utilizes the ESPN API, fetching the JSON data and listing this data in a list view format on an Android device.
+
+More features will be added in the near future.
