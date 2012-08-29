@@ -3,6 +3,7 @@ package com.example.espn.headlines;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 public class ListHeadlines  extends Activity {
@@ -29,5 +30,6 @@ public class ListHeadlines  extends Activity {
         
         lblHeadline.setText(headline);
         lblHref.setText(href);
+        lblHref.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
