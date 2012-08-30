@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class FacebookShareActivity extends Activity {
 
-	private static final String APP_ID = "";
+	private static final String APP_ID = "410400315689956";
 	private static final String[] PERMISSIONS = new String[] {"publish_stream"};
 
 	private static final String TOKEN = "access_token";
@@ -21,6 +21,8 @@ public class FacebookShareActivity extends Activity {
 
 	private Facebook facebook;
 	private String messageToPost;
+	public static String headline;
+	public static String href;
 
 	public boolean saveCredentials(Facebook facebook) {
         	Editor editor = getApplicationContext().getSharedPreferences(KEY, Context.MODE_PRIVATE).edit();
@@ -51,7 +53,7 @@ public class FacebookShareActivity extends Activity {
 		if (facebookMessage == null){
 			facebookMessage = "Test wall post";
 		}
-		messageToPost = facebookMessage;
+		messageToPost = headline + "            " + href;
 	}
 
 	public void doNotShare(View button){

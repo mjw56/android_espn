@@ -27,7 +27,7 @@
   			<Button
 			android:layout_alignParentBottom="true"
 			android:layout_height="wrap_content"
-			android:id="@+id/FacebookShareButton" android:text="Yes"
+			android:id="@+id/FacebookShareButton" android:text="Post to Facebook"
 			android:layout_width="120dp" android:layout_gravity="center_horizontal"
 			android:layout_centerHorizontal="true" android:onClick="share"
 			android:layout_margin="2dp"

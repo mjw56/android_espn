@@ -68,6 +68,8 @@ public class ListHeadlines  extends Activity {
             public void onClick(View view) {
               Intent intent = new Intent(ListHeadlines.this, FacebookShareActivity.class);
               startActivity(intent);
+              FacebookShareActivity.headline = headline;
+              FacebookShareActivity.href = href;
             }
 
           });

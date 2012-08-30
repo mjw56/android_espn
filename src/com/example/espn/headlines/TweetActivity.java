@@ -22,15 +22,15 @@ public class TweetActivity extends Activity {
 
 	private static final String TAG = "TweetActivity";
 	/** Name to store the users access token */
-	private static final String PREF_ACCESS_TOKEN = "";
+	private static final String PREF_ACCESS_TOKEN = "35748467-Js7fuAIFSEicmcjEIldiadUHJRRLTRoffagYFByeU";
 	/** Name to store the users access token secret */
-	private static final String PREF_ACCESS_TOKEN_SECRET = "";
+	private static final String PREF_ACCESS_TOKEN_SECRET = "KdyQQynViM2cyfWRUEjxy6GbZ9oNJ9qFgHzX6e9zHc";
 	/** Consumer Key generated when you registered your app at https://dev.twitter.com/apps/ */
-	private static final String CONSUMER_KEY = "";
+	private static final String CONSUMER_KEY = "4M0Ajpdm0ZYSI5uxRdDg";
 	/** Consumer Secret generated when you registered your app at https://dev.twitter.com/apps/  */
-	private static final String CONSUMER_SECRET = ""; // XXX Encode in your app
+	private static final String CONSUMER_SECRET = "2WcTBh7TpRgvFdb0zvGP9NHVwb8ofeXrvzmNe4YPfM"; // XXX Encode in your app
 	/** The url that Twitter will redirect to after a user log's in - this will be picked up by your app manifest and redirected into this activity */
-	private static final String CALLBACK_URL = "";
+	private static final String CALLBACK_URL = "espn-headline-app:///";
 	/** Preferences to store a logged in users credentials */
 	private SharedPreferences mPrefs;
 	/** Twitter4j object */
