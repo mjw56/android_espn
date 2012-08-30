@@ -19,6 +19,8 @@ public class ListHeadlines  extends Activity {
 	// JSON node keys
 	private static final String TAG_HEADLINE = "headline";
 	private static final String TAG_HREF = "href";
+	public static String headline;
+	public static String href;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +31,8 @@ public class ListHeadlines  extends Activity {
         Intent in = getIntent();
         
         // Get JSON values from previous intent
-        String headline = in.getStringExtra(TAG_HEADLINE);
-        String href = in.getStringExtra(TAG_HREF);
+        headline = in.getStringExtra(TAG_HEADLINE);
+        href = in.getStringExtra(TAG_HREF);
         
         // Displaying all values on the screen
         TextView lblHeadline = (TextView) findViewById(R.id.headline_label);
@@ -52,6 +54,9 @@ public class ListHeadlines  extends Activity {
             public void onClick(View view) {
               Intent intent = new Intent(ListHeadlines.this, TweetActivity.class);
               startActivity(intent);
+              TweetActivity.headline = headline;
+              TweetActivity.href = href;
+              
             }
 
           });

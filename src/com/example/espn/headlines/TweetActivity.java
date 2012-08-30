@@ -40,6 +40,9 @@ public class TweetActivity extends Activity {
 
 	private Button mLoginButton;
 	private Button mTweetButton;
+	
+	public static String headline;
+	public static String href;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -217,7 +220,7 @@ public class TweetActivity extends Activity {
 
 	private void tweetMessage() {
 		try {
-			mTwitter.updateStatus("Latest ESPN Headline");
+			mTwitter.updateStatus(headline +" "+ href);
 
 			Toast.makeText(this, "Tweet Successful!", Toast.LENGTH_SHORT).show();
 		} catch (TwitterException e) {
