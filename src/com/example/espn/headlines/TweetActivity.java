@@ -7,6 +7,7 @@ import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -20,7 +21,6 @@ import twitter4j.auth.RequestToken;
 public class TweetActivity extends Activity {
 
 	private static final String TAG = "TweetActivity";
-
 	/** Name to store the users access token */
 	private static final String PREF_ACCESS_TOKEN = "";
 	/** Name to store the users access token secret */
@@ -110,6 +110,25 @@ public class TweetActivity extends Activity {
 			WebView twitterSite = new WebView(this);
 			twitterSite.loadUrl(mReqToken.getAuthenticationURL());
 			setContentView(twitterSite);
+			twitterSite.requestFocus(View.FOCUS_DOWN);
+			twitterSite.setOnTouchListener(new View.OnTouchListener()
+			{
+			    @Override
+			    public boolean onTouch(View v, MotionEvent event)
+			    {
+			        switch (event.getAction())
+			        {
+			            case MotionEvent.ACTION_DOWN:
+			            case MotionEvent.ACTION_UP:
+			                if (!v.hasFocus())
+			                {
+			                    v.requestFocus();
+			                }
+			                break;
+			        }
+			        return false;
+			    }
+			});
 
 		} catch (TwitterException e) {
 			Toast.makeText(this, "Twitter Login error, try again later", Toast.LENGTH_SHORT).show();
