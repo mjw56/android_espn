@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ListHeadlines  extends Activity {
 	
@@ -39,5 +43,17 @@ public class ListHeadlines  extends Activity {
         
         lblHref.setText(Html.fromHtml(href_text));
         lblHref.setMovementMethod(LinkMovementMethod.getInstance());
+              
+        Button button = (Button) findViewById(R.id.tweet_this);
+        
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+              Intent intent = new Intent(ListHeadlines.this, TweetActivity.class);
+              startActivity(intent);
+            }
+
+          });
     }
 }

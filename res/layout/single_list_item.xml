@@ -18,5 +18,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="#acacac"/>
+  	<Button
+		android:id="@+id/tweet_this"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="Tweet this story" />
 </LinearLayout>
 
