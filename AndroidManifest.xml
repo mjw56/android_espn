@@ -33,6 +33,12 @@
                                 <data android:scheme="espn-headline-app" />
                         </intent-filter>
                 </activity>
+                <activity 
+                    android:name=".FacebookShareActivity" 
+                    android:label="@string/app_name"
+					android:screenOrientation="portrait" 
+					android:theme="@android:style/Theme.Dialog">
+                </activity>
         
         <!-- Single List Item View -->
         <activity

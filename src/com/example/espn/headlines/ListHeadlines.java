@@ -58,7 +58,19 @@ public class ListHeadlines  extends Activity {
               TweetActivity.href = href;
               
             }
+          });
+        
+        Button fb_button = (Button) findViewById(R.id.FacebookShareButton);
+        
+        fb_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+              Intent intent = new Intent(ListHeadlines.this, FacebookShareActivity.class);
+              startActivity(intent);
+            }
 
           });
+        
     }
 }
