@@ -15,7 +15,8 @@
         	android:textSize="20dip"
         	android:textStyle="bold"/>
     <TextView android:id="@+id/name_label"
-        	android:layout_below="@id/location_label"
+            android:layout_toRightOf="@id/location_label"
+            android:layout_marginLeft="6dip"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:textColor="#040404"
@@ -33,7 +34,7 @@
         	android:layout_marginBottom="40dp"/>
   	<Button
 		android:id="@+id/tweet_this"
-		android:text="Tweet headline"
+		android:text="Tweet team news"
 		android:layout_height="wrap_content" 
 		android:layout_width="140dp" 
 		android:layout_gravity="center_horizontal"

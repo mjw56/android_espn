@@ -42,7 +42,7 @@ public class ListTeamNews  extends Activity {
         TextView lblTeamName = (TextView) findViewById(R.id.name_label);
         TextView lblHref = (TextView) findViewById(R.id.href_label);
         
-        String href_text = "<a href='"+ href +"'>Read The Full Story</a>";
+        String href_text = "<a href='"+ href +"'>Check out their team news page.</a>";
         
         lblTeamLocation.setText(location);
         lblTeamName.setText(name);
@@ -59,7 +59,7 @@ public class ListTeamNews  extends Activity {
             public void onClick(View view) {
               Intent intent = new Intent(ListTeamNews.this, TweetActivity.class);
               startActivity(intent);
-              TweetActivity.headline = "news";
+              TweetActivity.headline = location + " "+ name + " news:";
               TweetActivity.href = href;
               
             }
@@ -73,7 +73,7 @@ public class ListTeamNews  extends Activity {
             public void onClick(View view) {
               Intent intent = new Intent(ListTeamNews.this, FacebookShareActivity.class);
               startActivity(intent);
-              FacebookShareActivity.headline = "news";
+              FacebookShareActivity.headline = location + " "+ name + " news:";
               FacebookShareActivity.href = href;
             }
           });      

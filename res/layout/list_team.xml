@@ -31,18 +31,19 @@
         	android:layout_toRightOf="@+id/thumbnail"
         	android:textColor="#040404"
         	android:typeface="sans" 
-        	android:textSize="15dip"
+        	android:textSize="16dip"
         	android:textStyle="bold"/>
 		<!-- Href label -->
         <TextView
             android:id="@+id/team_name"
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
-        	android:layout_below="@id/team_location"
-        	android:textColor="#343434"
-        	android:textSize="14dip"
-        	android:layout_marginTop="1dip"
-        	android:layout_toRightOf="@+id/thumbnail"/>
+        	android:layout_toRightOf="@id/team_location"
+        	android:layout_marginLeft="4dip"
+        	android:textColor="#040404"
+        	android:typeface="sans"
+        	android:textSize="16dip"
+        	android:textStyle="bold"/>
         <TextView
             android:id="@+id/team_href"
         	android:layout_width="fill_parent"
