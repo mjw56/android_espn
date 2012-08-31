@@ -74,8 +74,10 @@ public class TweetActivity extends Activity {
 	 * Otherwise redirect to Twitter for permission
 	 * 
 	 * @param v the clicked button
+	 * @throws TwitterException 
+	 * @throws IllegalStateException 
 	 */
-	public void buttonLogin(View v) {
+	public void buttonLogin(View v) throws IllegalStateException, TwitterException {
 		Log.i(TAG, "Login Pressed");
 		if (mPrefs.contains(PREF_ACCESS_TOKEN)) {
 			Log.i(TAG, "Repeat User");
@@ -141,8 +143,10 @@ public class TweetActivity extends Activity {
 	/**
 	 * The user had previously given our app permission to use Twitter</br> 
 	 * Therefore we retrieve these credentials and fill out the Twitter4j helper
+	 * @throws TwitterException 
+	 * @throws IllegalStateException 
 	 */
-	private void loginAuthorisedUser() {
+	private void loginAuthorisedUser() throws IllegalStateException, TwitterException {
 		String token = mPrefs.getString(PREF_ACCESS_TOKEN, null);
 		String secret = mPrefs.getString(PREF_ACCESS_TOKEN_SECRET, null);
 
@@ -150,8 +154,9 @@ public class TweetActivity extends Activity {
 		AccessToken at = new AccessToken(token, secret);
 
 		mTwitter.setOAuthAccessToken(at);
+		String user = mTwitter.getScreenName();
 		
-		Toast.makeText(this, "Welcome back", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Welcome back " + user + "!", Toast.LENGTH_SHORT).show();
 		
 		enableTweetButton();
 	}
@@ -205,7 +210,7 @@ public class TweetActivity extends Activity {
 
 			// Set the content view back after we changed to a webview
 			setContentView(R.layout.activity_main);
-			
+				
 			enableTweetButton();
 		} catch (TwitterException e) {
 			Toast.makeText(this, "Twitter auth error x01, try again later", Toast.LENGTH_SHORT).show();

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -45,14 +46,15 @@ public class AndroidParseJSON extends ListActivity {
 	//teams JSONArray
 	JSONArray teams = null;
 	
+	
+	// HashMaps to store our JSON data for ListView
+	ArrayList<HashMap<String, String>> headlineList = new ArrayList<HashMap<String, String>>();
+	ArrayList<HashMap<String, String>> teamList = new ArrayList<HashMap<String, String>>();
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		// Hashmap for ListView
-		ArrayList<HashMap<String, String>> headlineList = new ArrayList<HashMap<String, String>>();
-		ArrayList<HashMap<String, String>> teamList = new ArrayList<HashMap<String, String>>();
 
 		// Creating JSON Parser instance
 		JSONParse jParser = new JSONParse();
@@ -106,7 +108,7 @@ public class AndroidParseJSON extends ListActivity {
 	            String location = h.getString(TAG_TEAM_LOCATION);
 	            String id = h.getString(TAG_TEAM_ID);
 	     
-	            // Phone number is agin JSON Object
+	            // Traverse down the JSON array to grab the team url
 	            JSONObject links = h.getJSONObject(TAG_LINKS);
 	            JSONObject web = links.getJSONObject(TAG_WEB);
 	            JSONObject webTeams = web.getJSONObject(TAG_TEAMS);
@@ -127,7 +129,9 @@ public class AndroidParseJSON extends ListActivity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public void listHeadlines() {
 		
 		/**
 		 * Updating parsed JSON data into ListView
@@ -156,6 +160,39 @@ public class AndroidParseJSON extends ListActivity {
 				Intent in = new Intent(getApplicationContext(), ListHeadlines.class);
 				in.putExtra(TAG_HEADLINE, headline);
 				in.putExtra(TAG_HREF, href);
+				startActivity(in);
+		}
+		});
+	}
+	
+	public void listTeams() {
+		/**
+		 * Updating parsed JSON data into ListView
+		 * */
+		ListAdapter adapter = new SimpleAdapter(this, teamList,
+				R.layout.list_team,
+				new String[] { TAG_TEAM_LOCATION, TAG_TEAM_NAME}, new int[] {
+						R.id.team_location, R.id.team_name});
+
+		setListAdapter(adapter);
+
+		// selecting single ListView item
+		ListView exlv = getListView();
+
+		// Launching new screen on Selecting Single ListItem
+		exlv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// getting values from selected ListItem
+				String team_location = ((TextView) view.findViewById(R.id.team_location)).getText().toString();
+				String team_name = ((TextView) view.findViewById(R.id.team_name)).getText().toString();
+				
+				// Starting new intent
+				Intent in = new Intent(getApplicationContext(), ListHeadlines.class);
+				in.putExtra(TAG_TEAM_LOCATION, team_location);
+				in.putExtra(TAG_TEAM_NAME, team_name);
 				startActivity(in);
 		}
 		});
