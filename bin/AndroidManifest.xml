@@ -40,10 +40,15 @@
 					android:theme="@android:style/Theme.Dialog">
                 </activity>
         
-        <!-- Single List Item View -->
+        <!-- List Item View for Headlines -->
         <activity
             android:label="Single Menu Item"
             android:name=".ListHeadlines" >
+        </activity>
+        <!-- List Item View for Team News -->
+        <activity
+            android:label="Single Menu Item"
+            android:name=".ListTeamNews" >
         </activity>
     </application>
     

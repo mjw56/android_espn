@@ -247,7 +247,6 @@ public class AndroidParseJSON extends ListActivity {
 			// adding each child node to HashMap key => value
 			map.put(TAG_TEAM_LOCATION, location);
 			map.put(TAG_TEAM_NAME, name);
-			map.put(TAG_TEAM_ID, id);
 			map.put(TAG_HREF, href);
 
 			// adding HashList to ArrayList
@@ -259,8 +258,8 @@ public class AndroidParseJSON extends ListActivity {
 		 * */
 		ListAdapter adapter = new SimpleAdapter(this, teamList,
 				R.layout.list_team,
-				new String[] { TAG_TEAM_LOCATION, TAG_TEAM_NAME}, new int[] {
-						R.id.team_location, R.id.team_name});
+				new String[] { TAG_TEAM_LOCATION, TAG_TEAM_NAME, TAG_HREF}, new int[] {
+						R.id.team_location, R.id.team_name, R.id.team_href});
 
 		setListAdapter(adapter);
 
@@ -276,11 +275,13 @@ public class AndroidParseJSON extends ListActivity {
 				// getting values from selected ListItem
 				String team_location = ((TextView) view.findViewById(R.id.team_location)).getText().toString();
 				String team_name = ((TextView) view.findViewById(R.id.team_name)).getText().toString();
+				String team_href = ((TextView) view.findViewById(R.id.team_href)).getText().toString();
 				
 				// Starting new intent
-				Intent in = new Intent(getApplicationContext(), ListHeadlines.class);
+				Intent in = new Intent(getApplicationContext(), ListTeamNews.class);
 				in.putExtra(TAG_TEAM_LOCATION, team_location);
 				in.putExtra(TAG_TEAM_NAME, team_name);
+				in.putExtra(TAG_HREF, team_href);
 				startActivity(in);
 		}
 		});
