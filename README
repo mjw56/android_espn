@@ -1,6 +1,6 @@
 android_espn
 ------------
 
-This is a simple Android application that utilizes the ESPN API, fetching the JSON data and listing this data in a list view format on an Android device.
+This is a simple Android application that utilizes the ESPN API, fetching the JSON data and listing this data in a list view format on an Android device. Users have the choice of viewing the latest headlines from ESPN.com, or choosing a MLB,NFL,NBA, or NHL team's ESPN home page. 
 
-Users can have the option to login to their twitter account and tweet a headline that they find interesting.
+Users can have the option to login to their twitter and or facebook account and share any items that they find interesting.
