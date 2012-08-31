@@ -22,7 +22,8 @@ import android.widget.TextView;
 public class AndroidParseJSON extends ListActivity {
 
 	// url to make request
-	private static String url = "http://api.espn.com/v1/sports/news/headlines/top?apikey=bxesq8b3qq5gf7cuew3nkw69";
+	private static String headlinesURL = "http://api.espn.com/v1/sports/news/headlines/top?apikey=bxesq8b3qq5gf7cuew3nkw69";
+	private static String mlbTeamsURL = "http://api.espn.com/v1/sports/baseball/mlb/teams?apikey=bxesq8b3qq5gf7cuew3nkw69";
 	 
 	// JSON Nodes
 	private static final String TAG_HEADLINES = "headlines";
@@ -30,9 +31,19 @@ public class AndroidParseJSON extends ListActivity {
 	private static final String TAG_LINKS = "links";
 	private static final String TAG_WEB = "web";
 	private static final String TAG_HREF = "href";
+	private static final String TAG_SPORTS = "sports";
+	private static final String TAG_LEAGUES = "leagues";
+	private static final String TAG_TEAMS = "teams";
+	private static final String TAG_TEAM_NAME = "name";
+	private static final String TAG_TEAM_LOCATION = "location";
+	private static final String TAG_TEAM_ID = "id";
+	private static final String TAG_TEAM_URL = "url";
 	 
 	// headlines JSONArray
 	JSONArray headlines = null;
+	
+	//teams JSONArray
+	JSONArray teams = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,16 +52,27 @@ public class AndroidParseJSON extends ListActivity {
 		
 		// Hashmap for ListView
 		ArrayList<HashMap<String, String>> headlineList = new ArrayList<HashMap<String, String>>();
+		ArrayList<HashMap<String, String>> teamList = new ArrayList<HashMap<String, String>>();
 
 		// Creating JSON Parser instance
 		JSONParse jParser = new JSONParse();
 
 		// getting JSON string from URL
-		JSONObject json = jParser.getJSONFromUrl(url);
+		JSONObject headlinesJSON = jParser.getJSONFromUrl(headlinesURL);
+		JSONObject teamsJSON = jParser.getJSONFromUrl(mlbTeamsURL);
+		
 
 		try {
 			// Getting Array of Headlines
-			headlines = json.getJSONArray(TAG_HEADLINES);
+			headlines = headlinesJSON.getJSONArray(TAG_HEADLINES);
+			
+			JSONArray sports = teamsJSON.getJSONArray(TAG_SPORTS);
+			//Getting Array of teams
+			//teams = teamsJSON.getJSONArray(TAG_TEAMS);
+			JSONObject sportsObj = sports.getJSONObject(0);
+			JSONArray leagues = sportsObj.getJSONArray(TAG_LEAGUES);
+			JSONObject leaguesObj = leagues.getJSONObject(0);
+			JSONArray teams = leaguesObj.getJSONArray(TAG_TEAMS);
 			
 	        // looping through All Headlines
 	        for(int i = 0; i < headlines.length(); i++){
@@ -59,7 +81,7 @@ public class AndroidParseJSON extends ListActivity {
 	            // Storing each json item in variable
 	            String headline = h.getString(TAG_HEADLINE);
 	     
-	            // Phone number is agin JSON Object
+	            // Traverse down the JSON to extract the URL
 	            JSONObject links = h.getJSONObject(TAG_LINKS);
 	            JSONObject web = links.getJSONObject(TAG_WEB);
 	            String href = web.getString(TAG_HREF);
@@ -74,6 +96,34 @@ public class AndroidParseJSON extends ListActivity {
 				// adding HashList to ArrayList
 				headlineList.add(map);
 			}
+	        
+	        // do the same looping for all the teams
+	        for(int i = 0; i < teams.length(); i++){
+	            JSONObject h = teams.getJSONObject(i);
+	     
+	            // Storing each json item in variable
+	            String name = h.getString(TAG_TEAM_NAME);
+	            String location = h.getString(TAG_TEAM_LOCATION);
+	            String id = h.getString(TAG_TEAM_ID);
+	     
+	            // Phone number is agin JSON Object
+	            JSONObject links = h.getJSONObject(TAG_LINKS);
+	            JSONObject web = links.getJSONObject(TAG_WEB);
+	            JSONObject webTeams = web.getJSONObject(TAG_TEAMS);
+	            String href = webTeams.getString(TAG_HREF);
+				
+				// creating new HashMap
+				HashMap<String, String> map = new HashMap<String, String>();
+				
+				// adding each child node to HashMap key => value
+				map.put(TAG_TEAM_LOCATION, location);
+				map.put(TAG_TEAM_NAME, name);
+				map.put(TAG_TEAM_ID, id);
+				map.put(TAG_HREF, href);
+
+				// adding HashList to ArrayList
+				teamList.add(map);
+			}	     	        
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
