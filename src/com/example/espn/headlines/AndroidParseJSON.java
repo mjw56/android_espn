@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -45,7 +46,6 @@ public class AndroidParseJSON extends ListActivity {
 	
 	//teams JSONArray
 	JSONArray teams = null;
-	
 	
 	// HashMaps to store our JSON data for ListView
 	ArrayList<HashMap<String, String>> headlineList = new ArrayList<HashMap<String, String>>();
@@ -129,6 +129,26 @@ public class AndroidParseJSON extends ListActivity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+        
+		Button headlines_button = (Button) findViewById(R.id.latest_headlines);
+  
+		headlines_button.setOnClickListener(new View.OnClickListener() {
+
+		@Override
+		public void onClick(View view) {
+			listHeadlines();
+			}
+		});
+		
+		Button mlb_team_news_button = (Button) findViewById(R.id.mlb_team_news);
+		  
+		mlb_team_news_button.setOnClickListener(new View.OnClickListener() {
+
+		@Override
+		public void onClick(View view) {
+			listTeams();
+			}
+		});
 	}
 	
 	public void listHeadlines() {
