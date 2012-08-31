@@ -10,6 +10,12 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>
+		<ImageView     
+			android:id="@+id/list_image"   
+	    	android:layout_width="200dip"
+	    	android:layout_height="200dip"
+	    	android:layout_gravity="center_horizontal"
+	    	android:src="@drawable/esp_api"/>
       	<Button
 			android:id="@+id/latest_headlines"
 			android:text="Latest Headlines"
@@ -29,4 +35,34 @@
 			android:layout_margin="2dp"
 			android:padding="5dp"
 			android:layout_below="@id/latest_headlines"/>
+      	<Button
+			android:id="@+id/nfl_team_news"
+			android:text="NFL team news"
+			android:layout_height="wrap_content" 
+			android:layout_width="140dp" 
+			android:layout_gravity="center_horizontal"
+			android:layout_centerHorizontal="true" 
+			android:layout_margin="2dp"
+			android:padding="5dp"
+			android:layout_below="@id/mlb_team_news"/>
+      	<Button
+			android:id="@+id/nba_team_news"
+			android:text="NBA team news"
+			android:layout_height="wrap_content" 
+			android:layout_width="140dp" 
+			android:layout_gravity="center_horizontal"
+			android:layout_centerHorizontal="true" 
+			android:layout_margin="2dp"
+			android:padding="5dp"
+			android:layout_below="@id/nfl_team_news"/>
+      	<Button
+			android:id="@+id/nhl_team_news"
+			android:text="NHL team news"
+			android:layout_height="wrap_content" 
+			android:layout_width="140dp" 
+			android:layout_gravity="center_horizontal"
+			android:layout_centerHorizontal="true" 
+			android:layout_margin="2dp"
+			android:padding="5dp"
+			android:layout_below="@id/nba_team_news"/>
 </LinearLayout>

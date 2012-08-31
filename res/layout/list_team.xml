@@ -40,7 +40,7 @@
         	android:layout_height="wrap_content"
         	android:layout_below="@id/team_location"
         	android:textColor="#343434"
-        	android:textSize="10dip"
+        	android:textSize="14dip"
         	android:layout_marginTop="1dip"
         	android:layout_toRightOf="@+id/thumbnail"/>
 
