@@ -155,6 +155,7 @@ public class TweetActivity extends Activity {
 
 		mTwitter.setOAuthAccessToken(at);
 		String user = mTwitter.getScreenName();
+		getUserFriends(mTwitter.getId());
 		
 		Toast.makeText(this, "Welcome back " + user + "!", Toast.LENGTH_SHORT).show();
 		
@@ -177,6 +178,10 @@ public class TweetActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		Log.i(TAG, "Arrived at onResume");
+	}
+	
+	private void getUserFriends(long userID) throws TwitterException{
+		mTwitter.getFriendsIDs(1, userID);
 	}
 	
 	/**

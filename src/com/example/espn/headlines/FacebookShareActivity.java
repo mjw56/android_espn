@@ -1,9 +1,14 @@
 package com.example.espn.headlines;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Picture;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +26,12 @@ public class FacebookShareActivity extends Activity {
 
 	private Facebook facebook;
 	private String messageToPost;
+	private String linkToPost;
+	private String imageURLToPost;
+	private String captionToPost;
+	private String descriptionToPost;
+	private String nameToPost;
+	
 	public static String headline;
 	public static String href;
 
@@ -53,7 +64,12 @@ public class FacebookShareActivity extends Activity {
 		if (facebookMessage == null){
 			facebookMessage = "Test wall post";
 		}
-		messageToPost = headline + "            " + href;
+		linkToPost = href;
+		messageToPost = headline;
+		imageURLToPost = "http://a.espncdn.com/i/apis/attribution/espn-red_50.png";
+		nameToPost = headline;
+		captionToPost = "This text is the caption";
+		descriptionToPost = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 	}
 
 	public void doNotShare(View button){
@@ -64,18 +80,23 @@ public class FacebookShareActivity extends Activity {
 			loginAndPostToWall();
 		}
 		else {
-			postToWall(messageToPost);
+			postToWall(messageToPost, linkToPost, imageURLToPost, nameToPost, captionToPost, descriptionToPost);
 		}
 	}
 
 	public void loginAndPostToWall(){
 		 facebook.authorize(this, PERMISSIONS, Facebook.FORCE_DIALOG_AUTH, new LoginDialogListener());
+		 
 	}
 
-	public void postToWall(String message){
+	public void postToWall(String message, String link, String image, String name, String caption, String description){
 		Bundle parameters = new Bundle();
                 parameters.putString("message", message);
-                parameters.putString("description", "topic share");
+                parameters.putString("picture", image);
+                parameters.putString("link", link);
+                parameters.putString("name", name);
+                parameters.putString("caption", caption);
+                parameters.putString("description", description);
                 try {
         	        facebook.request("me");
 			String response = facebook.request("me/feed", parameters, "POST");
@@ -95,11 +116,52 @@ public class FacebookShareActivity extends Activity {
 		}
 	}
 
+	public void getBirthdays() throws MalformedURLException, IOException {
+		Bundle bundle = new Bundle();
+		String graphpath = "me/friends";
+		bundle.putString("fields", "first_name");
+		String response = facebook.request(graphpath, bundle, "GET");
+		Log.d("Tests", "got response: " + response);
+	}
+	
+	public void getPosts() throws MalformedURLException, IOException {
+		Bundle bundle = new Bundle();
+		String graphpath = "me/feed";
+		bundle.putString("name", "test_album");
+		bundle.putString("message", "message for the test album");
+		String response = facebook.request(graphpath, bundle, "GET");
+		Log.d("Tests", "got response: " + response);
+	}
+	
+	public void getUserID() throws MalformedURLException, IOException {
+		Bundle bundle = new Bundle();
+		String graphpath = "me/friends";
+		bundle.putString("fields", "id");
+		String response = facebook.request(graphpath, bundle, "GET");
+		Log.d("Tests", "got response: " + response);
+	}
+	
+	public void getFavoriteAthletes() throws MalformedURLException, IOException {
+		Bundle bundle = new Bundle();
+		String graphpath = "me/friends";
+		bundle.putString("fields", "favorite_athletes");
+		String response = facebook.request(graphpath, bundle, "GET");
+		Log.d("Tests", "got response: " + response);
+	}
+	
+	public void getFavoriteTeams() throws MalformedURLException, IOException {
+		Bundle bundle = new Bundle();
+		String graphpath = "me/friends";
+		bundle.putString("fields", "favorite_teams");
+		String response = facebook.request(graphpath, bundle, "GET");
+		Log.d("Tests", "got response: " + response);
+	}
+	
 	class LoginDialogListener implements com.example.espn.headlines.Facebook.DialogListener {
 	    public void onComplete(Bundle values) {
 	    	saveCredentials(facebook);
 	    	if (messageToPost != null){
-			postToWall(messageToPost);
+			postToWall(messageToPost, linkToPost, imageURLToPost, nameToPost, captionToPost, descriptionToPost);
 		}
 	    }
 	    public void onFacebookError(FacebookError error) {
