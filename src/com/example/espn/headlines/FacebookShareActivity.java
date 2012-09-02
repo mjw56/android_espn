@@ -90,6 +90,7 @@ public class FacebookShareActivity extends Activity {
 	}
 
 	public void postToWall(String message, String link, String image, String name, String caption, String description){
+		String response = null;
 		Bundle parameters = new Bundle();
                 parameters.putString("message", message);
                 parameters.putString("picture", image);
@@ -99,8 +100,10 @@ public class FacebookShareActivity extends Activity {
                 parameters.putString("description", description);
                 try {
         	        facebook.request("me");
-			String response = facebook.request("me/feed", parameters, "POST");
+			//response = facebook.request("me/feed", parameters, "POST");
+        	        getUserLikes();
 			Log.d("Tests", "got response: " + response);
+
 			if (response == null || response.equals("") ||
 			        response.equals("false")) {
 				showToast("Blank response.");
@@ -143,16 +146,24 @@ public class FacebookShareActivity extends Activity {
 	
 	public void getFavoriteAthletes() throws MalformedURLException, IOException {
 		Bundle bundle = new Bundle();
-		String graphpath = "me/friends";
-		bundle.putString("fields", "favorite_athletes");
+		String graphpath = "me/favorite_athletes";
+		bundle.putString("fields", "name");
 		String response = facebook.request(graphpath, bundle, "GET");
-		Log.d("Tests", "got response: " + response);
+		Log.d("Tests", "got athletes response: " + response);
 	}
 	
 	public void getFavoriteTeams() throws MalformedURLException, IOException {
 		Bundle bundle = new Bundle();
-		String graphpath = "me/friends";
-		bundle.putString("fields", "favorite_teams");
+		String graphpath = "me/favorite_teams";
+		bundle.putString("fields", "name");
+		String response = facebook.request(graphpath, bundle, "GET");
+		Log.d("Tests", "got response: " + response);
+	}
+	
+	public void getUserLikes() throws MalformedURLException, IOException {
+		Bundle bundle = new Bundle();
+		String graphpath = "me/likes";
+		bundle.putString("fields", "name");
 		String response = facebook.request(graphpath, bundle, "GET");
 		Log.d("Tests", "got response: " + response);
 	}
